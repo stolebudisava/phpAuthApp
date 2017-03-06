@@ -10,6 +10,8 @@ https://getcomposer.org/download/
 
 3)Create MySQL table with query:
 
+
+```mysql
  	CREATE TABLE `users` (
  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
  `email` varchar(255) DEFAULT NULL,
@@ -26,5 +28,5 @@ https://getcomposer.org/download/
  `updated_at` timestamp NULL DEFAULT NULL,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
-
+```
 
