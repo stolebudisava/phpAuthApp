@@ -6,7 +6,7 @@ How to setup:
 1)Install composer
 https://getcomposer.org/download/
 
-2)Run composer install in console and deploy app to wamp/xampp server.
+2)Run **composer install** in console and deploy app to wamp/xampp server.
 
 3)Create MySQL table with query:
 
