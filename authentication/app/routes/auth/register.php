@@ -13,13 +13,37 @@ $app->post('/register', function() use ($app) {
     $password = $request->post('password');
     $passwordConfirm = $request->post('password_confirm');
 
-    $app->user->create([
-        'email'=>$email,
-        'username'=>$username,
-        'password'=>$app->hash->password($password)
+    $v = $app->validation;
+
+    $v->validate([
+        'email' => [$email, 'required|email|uniqueEmail'],
+        'username' =>[$username, 'required|alnumDash|max(20)|uniqueUsername'],
+        'password' =>[$password, 'required|min(6)'],
+        'password_confirm' =>[$passwordConfirm, 'required|matches(password)'],
+
     ]);
 
-    $app->flash('global', 'You have been registered.');
-    $app->response->redirect($app->urlFor('home'));
+    if($v->passes()) {
+        $app->user->create([
+            'email'=>$email,
+            'username'=>$username,
+            'password'=>$app->hash->password($password)
+        ]);
+
+        /*
+        $app->mail->send('email/auth/registered.php', ['user'=>$app->user], function($message) use ($app) {
+            $message->to($app->user->email);
+            $message->subject('Thanks for registering.');
+        });
+        */
+
+        $app->flash('global', 'You have been registered.');
+        $app->response->redirect($app->urlFor('home'));
+    }
+
+    $app->render('auth/register.php', [
+        'errors' => $v-> errors(),
+        'request' => $request,
+    ]);
 
 })->name('register.post');
