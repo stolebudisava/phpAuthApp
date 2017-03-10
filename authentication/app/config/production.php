@@ -31,8 +31,8 @@ return [
 		'smtp_auth' => true,
 		'smtp_secure' => 'tls',
 		'host' => 'smtp.gmail.com',
-		'username' => 'stole@gmail.com',
-		'password' => 'stole',
+        'username' => 'stojan.mitric.dev@gmail.com',
+        'password' => '357stole',
 		'port' => 587,
 		'html' => true
 	],

@@ -12,6 +12,8 @@ use Project\Validation\Validator;
 
 use Project\Middleware\BeforeMiddleware;
 
+use Project\Mail\Mailer;
+
 session_cache_limiter(false);
 session_start();
 
@@ -53,6 +55,7 @@ $app->container->singleton('validation', function() use ($app){
 $app->container->singleton('mail', function() use ($app) {
     $mailer = new PHPMailer;
 
+    $mailer->IsSMTP();
     $mailer->Host = $app->config->get('mail.host');
     $mailer->SMTPAuth = $app->config->get('mail.smtp_auth');
     $mailer->SMTPSecure = $app->config->get('mail.smtp_secure');
@@ -64,6 +67,7 @@ $app->container->singleton('mail', function() use ($app) {
 
     // Return mailer object
 
+    return new Mailer($app->view, $mailer);
 });
 
 
