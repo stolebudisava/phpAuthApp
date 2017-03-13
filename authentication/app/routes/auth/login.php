@@ -1,12 +1,12 @@
 <?php
 
-$app->get('/login', function() use ($app){
+$app->get('/login', $guest(), function() use ($app){
 
     $app->render('auth/login.php');
 
 })->name('login');
 
-$app->post('/login', function() use ($app){
+$app->post('/login', $guest(), function() use ($app){
 
     $request = $app->request;
 
@@ -25,6 +25,7 @@ $app->post('/login', function() use ($app){
         $user= $app->user
             ->where('username', $identifier)
             ->orWhere('email', $identifier)
+            ->where('active', true)
             ->first();
 
         if($user && $app->hash->passwordCheck($password, $user->password)) {

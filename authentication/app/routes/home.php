@@ -8,7 +8,10 @@ $app->get('/', function() use ($app) {
         $message->subject('Thanks for registering.');
     });
 */
+    //echo $app->randomlib->generateString(128);
 
 	$app->render('home.php');
 })->name('home');
+
+
 

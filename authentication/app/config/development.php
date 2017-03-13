@@ -42,7 +42,7 @@ return [
 	],
 
 	'csrf' => [
-		'session' => 'csrf_token'
+		'key' => 'csrf_token'
 	]
 
 

@@ -11,8 +11,11 @@ use Project\Helpers\Hash;
 use Project\Validation\Validator;
 
 use Project\Middleware\BeforeMiddleware;
+use Project\Middleware\CsrfProtectMiddleware;
 
 use Project\Mail\Mailer;
+
+use RandomLib\Factory as RandomLib;
 
 session_cache_limiter(false);
 session_start();
@@ -30,13 +33,16 @@ $app = new Slim([
 ]);
 
 $app->add(new BeforeMiddleware);
+$app->add(new CsrfProtectMiddleware);
 
 $app -> configureMode($app->config('mode'), function() use ($app) {
 	$app -> config = Config::load(INC_ROOT . "/app/config/{$app->mode}.php");
 });
 
 require 'database.php';
+require 'filters.php';
 require 'routes.php';
+
 
 $app->auth = false;
 
@@ -68,6 +74,11 @@ $app->container->singleton('mail', function() use ($app) {
     // Return mailer object
 
     return new Mailer($app->view, $mailer);
+});
+
+$app->container->singleton('randomlib', function() {
+    $factory = new RandomLib;
+    return $factory->getMediumStrengthGenerator();
 });
 
 
