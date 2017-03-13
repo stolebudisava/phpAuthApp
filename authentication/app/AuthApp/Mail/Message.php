@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Mail;
+namespace AuthApp\Mail;
 
 class Message
 {

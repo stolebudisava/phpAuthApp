@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\User;
+namespace AuthApp\User;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent
@@ -36,5 +36,26 @@ class User extends Eloquent
             'active' => true,
             'active_hash' => null
         ]);
+    }
+
+    public function getAvatarUrl()
+    {
+        $size = isset($options['size']) ? $options['size'] : 45;
+        return 'http://www.gravatar.com/avatar/' . md5($this->email) . '?s=' . $size . '&d=mm';
+    }
+
+    public function updateRememberCredentials($identifier, $token)
+    {
+        $this->update([
+
+            'remember_identifier' => $identifier,
+            'remember_token' => $token
+
+        ]);
+    }
+
+    public function removeRememberCredentials()
+    {
+        $this->updateRememberCredentials(null, null);
     }
 }

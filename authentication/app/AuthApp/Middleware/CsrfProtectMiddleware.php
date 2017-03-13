@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Middleware;
+namespace AuthApp\Middleware;
 
 use Slim\Middleware;
 

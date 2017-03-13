@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\Helpers;
+namespace AuthApp\Helpers;
 
 class Hash
 {

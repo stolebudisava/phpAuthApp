@@ -1,9 +1,9 @@
 <?php
 
-namespace Project\Validation;
+namespace AuthApp\Validation;
 
 use Violin\Violin;
-use Project\User\User;
+use AuthApp\User\User;
 
 class Validator extends Violin
 {

@@ -6,14 +6,14 @@ use Slim\Views\TwigExtension;
 
 use Noodlehaus\Config;
 
-use Project\User\User;
-use Project\Helpers\Hash;
-use Project\Validation\Validator;
+use AuthApp\User\User;
+use AuthApp\Helpers\Hash;
+use AuthApp\Validation\Validator;
 
-use Project\Middleware\BeforeMiddleware;
-use Project\Middleware\CsrfProtectMiddleware;
+use AuthApp\Middleware\BeforeMiddleware;
+use AuthApp\Middleware\CsrfProtectMiddleware;
 
-use Project\Mail\Mailer;
+use AuthApp\Mail\Mailer;
 
 use RandomLib\Factory as RandomLib;
 
