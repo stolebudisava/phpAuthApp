@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class User extends Eloquent
 {
 	protected $table = 'users';
+
 	protected $fillable = [
 		'email',
 		'username',
@@ -58,4 +59,20 @@ class User extends Eloquent
     {
         $this->updateRememberCredentials(null, null);
     }
+
+    public function hasPermission($permission)
+    {
+        return (bool) $this->permissions->{$permission};
+    }
+
+    public function isAdmin()
+    {
+         return $this->hasPermission('is_admin');
+    }
+
+    public function permissions()
+    {
+        return $this->hasOne('AuthApp\User\UserPermission', 'user_id');
+    }
+
 }
