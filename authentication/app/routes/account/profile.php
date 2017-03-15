@@ -12,7 +12,7 @@ $app->post('/account/profile', $authenticated(), function() use ($app){
 
     $email = $request->post('email');
     $firstName = $request->post('first_name');
-    $lastName = $request->post('$last_name');
+    $lastName = $request->post('last_name');
 
     $v = $app->validation;
 
@@ -24,8 +24,18 @@ $app->post('/account/profile', $authenticated(), function() use ($app){
 
     if($v->passes()) {
         $user->update([
-            'email'
+            'email' => $email,
+            'first_name' => $firstName,
+            'last_name' => $lastName
         ]);
+
+        $app->flash('global', 'Your details have been updated.');
+        $app->response->redirect($app->urlFor('account.profile'));
     }
+
+    $app->render('account/profile.php', [
+        'errors' => $v->errors(),
+        'request' => $request
+    ]);
 
 })->name('account.profile.post');
