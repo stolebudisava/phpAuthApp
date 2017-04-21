@@ -24,7 +24,6 @@ return [
 	'auth' => [
 		'session' => 'user_id',
 		'remember' => 'user_r'
-
 	],
 
 	'mail' => [

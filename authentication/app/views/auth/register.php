@@ -29,6 +29,18 @@
         </div>
 
         <div>
+            <label for="first_name"> First name </label>
+            <input type="text" name="first_name" id="first_name" {% if request.post('first_name') %} value="{{request.post('first_name')}}" {%endif%}>
+            {% if errors.has('first_name')%} {{errors.first('first_name')}} {% endif %}
+        </div>
+
+        <div>
+            <label for="last_name"> Last name </label>
+            <input type="text" name="last_name" id="last_name" {% if request.post('last_name') %} value="{{request.post('last_name')}}" {%endif%}>
+            {% if errors.has('last_name')%} {{errors.first('last_name')}} {% endif %}
+        </div>
+
+        <div>
             <input type="submit" value="Register">
         </div>
 

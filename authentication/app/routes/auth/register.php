@@ -14,6 +14,8 @@ $app->post('/register', $guest(), function() use ($app) {
     $username = $request->post('username');
     $password = $request->post('password');
     $passwordConfirm = $request->post('password_confirm');
+    $firstName = $request->post('first_name');
+    $lastName = $request->post('last_name');
 
     $v = $app->validation;
 
@@ -22,7 +24,8 @@ $app->post('/register', $guest(), function() use ($app) {
         'username' =>[$username, 'required|alnumDash|max(20)|uniqueUsername'],
         'password' =>[$password, 'required|min(6)'],
         'password_confirm' =>[$passwordConfirm, 'required|matches(password)'],
-
+        'first_name' =>[$firstName, 'required|alnumDash|max(20)'],
+        'last_name' =>[$lastName, 'required|alnumDash|max(20)']
     ]);
 
     if($v->passes()) {
@@ -34,7 +37,10 @@ $app->post('/register', $guest(), function() use ($app) {
             'username'=>$username,
             'password'=>$app->hash->password($password),
             'active' => false,
-            'active_hash' => $app->hash->hash($identifier)
+            'active_hash' => $app->hash->hash($identifier),
+            'first_name' => $firstName,
+            'last_name' => $lastName
+
         ]);
 
         $user->permissions()->create(UserPermission::$defaults);
